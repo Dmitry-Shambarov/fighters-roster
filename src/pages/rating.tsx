@@ -3,7 +3,7 @@ import React from 'react';
 const Rating = () => {
     return (
         <div>
-            rating
+             <h1>rating</h1>
         </div>
     );
 };
