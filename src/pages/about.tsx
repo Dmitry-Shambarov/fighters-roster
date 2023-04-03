@@ -1,9 +1,10 @@
-import React from 'react';
+import s from '../styles/about.module.scss'
+
 
 const About = () => {
      return (
           <div>
-               <h1>about</h1>
+               <h1 className={s.title}>about</h1>
           </div>
      );
 };

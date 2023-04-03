@@ -1,9 +1,9 @@
-import React from 'react';
+import s from '../styles/rating.module.scss'
 
 const Rating = () => {
      return (
           <div>
-               <h1>rating</h1>
+               <h1 className={s.title}>rating</h1>
           </div>
      );
 };
