@@ -1,9 +1,9 @@
-import React from 'react';
+import s from '../styles/fighters.module.scss'
 
 const Fighters = () => {
      return (
           <div>
-               <h1>fighters</h1>
+               <h1 className={s.title}>fighters</h1>
           </div>
      );
 };
