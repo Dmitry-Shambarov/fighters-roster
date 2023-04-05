@@ -1,12 +1,13 @@
-import s from '../styles/about.module.scss'
-
+import s from '../styles/about.module.scss';
+import Header from '@/components/Header';
 
 const About = () => {
-     return (
-          <div>
-               <h1 className={s.title}>about</h1>
-          </div>
-     );
+  return (
+    <div>
+      <Header />
+      <h1 className={s.title}>about</h1>
+    </div>
+  );
 };
 
 export default About;
