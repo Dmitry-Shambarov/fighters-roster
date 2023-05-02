@@ -7,9 +7,9 @@ type Props = {
 
 export const Page = ({ children }: Props) => {
   return (
-    <div>
-      <Header/>
+    <>
+      <Header />
       {children}
-    </div>
+    </>
   );
 };
