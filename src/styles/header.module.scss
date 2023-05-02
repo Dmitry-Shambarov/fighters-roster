@@ -15,10 +15,12 @@ $body-font: 'Helvetica Neue', sans-serif;
 
 $scale: 1.2;
 $transition-duration: 0.3s;
+
 .link {
   &:hover {
     transform: scale($scale);
     transition-duration: $transition-duration;
   }
+
   color: lighten($secondary-color, 90%);
 }
