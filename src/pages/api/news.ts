@@ -9,6 +9,7 @@ export type PostType = {
     current: string;
   };
   image: string;
+  body: any;
 };
 
 export type Data = {

@@ -2,6 +2,7 @@ import { loadPosts, PostType } from '@/pages/api/news';
 import { useState } from 'react';
 import Post from '@/components/Post/Post';
 import PostGrid from '@/components/PostGrid/PostGrid';
+import s from '../styles/index.module.scss';
 
 type HomePropsType = HomeProps & PostType;
 
@@ -40,12 +41,19 @@ export default function Home(props: HomePropsType) {
     <>
       <PostGrid>
         {posts.map((post) => (
-          <Post key={post.slug.current} title={post.title} _type={post._type} slug={post.slug} image={post.image} />
+          <Post
+            key={post.slug.current}
+            title={post.title}
+            _type={post._type}
+            slug={post.slug}
+            image={post.image}
+            body={post.body}
+          />
         ))}
       </PostGrid>
       {isLoadButton && (
         <div>
-          <button onClick={getMorePosts} disabled={loading}>
+          <button onClick={getMorePosts} disabled={loading} className={s.button}>
             Load more posts...
           </button>
         </div>

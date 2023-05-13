@@ -1,45 +1,41 @@
 import { client } from '@/lib/client';
 import Article from '@/components/Article/Article';
+import Content from '@/components/Content/Content';
+import s from './styles.module.scss';
+import { PostType } from '@/pages/api/news';
 
-// @ts-ignore
-const Description = ({ post }) => {
-  console.log(post);
-  return <Article>
+interface IPost {
+  slug: { current: string };
+}
 
-  </Article>;
+const Description = ({ post }: { post: PostType }) => {
+  return (
+    <Article backUrl="/">
+      <h2 className={s.title}>{post.title}</h2>
+      <Content body={post.body} />
+    </Article>
+  );
 };
 
 export default Description;
 
 export async function getStaticPaths() {
-  const query = `*[type == "news"] {
-  slug {
-  current
-    }
-  }`;
-
+  const query = `*[_type == "news"] { slug { current } }`;
   const posts = await client.fetch(query);
   const paths = posts.map((post: any) => ({
     params: {
-      slug: post.current.slug,
+      slug: post.slug.current,
     },
   }));
   return {
     paths,
-    fallback: 'blocking',
+    fallback: false,
   };
 }
 
-// @ts-ignore
-export async function getStaticProps({ params: { slug } }) {
-  const query = `*[_type == "news" && slug.current == "${slug}"][0]`;
-  console.log('query', query);
-
-  const post = await client.fetch(query);
-  console.log('post', post);
-  return {
-    props: {
-      post,
-    },
-  };
+export async function getStaticProps({ params }: { params: { slug: string } }) {
+  const query = `*[_type == "news"]`;
+  const posts = await client.fetch(query);
+  const post = posts.find((post: IPost) => post.slug.current === params.slug) || null;
+  return { props: { post } };
 }
