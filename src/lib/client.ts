@@ -15,7 +15,7 @@ export const clientConfig: ClientConfig = {
 export const client = createClient({
   projectId: clientConfig.projectId,
   dataset: clientConfig.dataset,
-  useCdn: false,
+  useCdn: true,
   apiVersion: '2023-04-12',
   token: process.env.SANITY_SECRET_TOKEN,
   ignoreBrowserTokenWarning: true,
