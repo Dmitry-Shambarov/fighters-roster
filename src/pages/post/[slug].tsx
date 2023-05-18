@@ -4,10 +4,6 @@ import Content from '@/components/Content/Content';
 import s from './styles.module.scss';
 import { PostType } from '@/pages/api/news';
 
-interface IPost {
-  slug: { current: string };
-}
-
 const Description = ({ post }: { post: PostType }) => {
   return (
     <Article backUrl="/">
@@ -22,7 +18,7 @@ export default Description;
 export async function getStaticPaths() {
   const query = `*[_type == "news"] { slug { current } }`;
   const posts = await client.fetch(query);
-  const paths = posts.map((post: any) => ({
+  const paths = posts.map((post: PostType) => ({
     params: {
       slug: post.slug.current,
     },
@@ -36,6 +32,6 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }: { params: { slug: string } }) {
   const query = `*[_type == "news"]`;
   const posts = await client.fetch(query);
-  const post = posts.find((post: IPost) => post.slug.current === params.slug) || null;
+  const post = posts.find((post: PostType) => post.slug.current === params.slug) || null;
   return { props: { post } };
 }

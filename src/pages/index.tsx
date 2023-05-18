@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Post from '@/components/Post/Post';
 import PostGrid from '@/components/PostGrid/PostGrid';
 import s from '../styles/index.module.scss';
+import Slider from '@/components/Slider/Slider';
 
 type HomePropsType = HomeProps & PostType;
 
@@ -39,6 +40,7 @@ export default function Home(props: HomePropsType) {
 
   return (
     <>
+      <Slider/>
       <PostGrid>
         {posts.map((post) => (
           <Post

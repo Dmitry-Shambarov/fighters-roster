@@ -12,7 +12,7 @@ const Article = ({ children, backUrl }: Props) => {
   return (
     <article className={s.article}>
       <Link href={backUrl}>
-        <AiOutlineArrowLeft className={s.articleBack} />
+        <AiOutlineArrowLeft className={s.Back} />
       </Link>
       {children}
     </article>
