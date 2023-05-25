@@ -37,6 +37,7 @@
     "stylelint": "^15.4.0",
     "stylelint-config-standard-scss": "^7.0.1",
     "stylelint-scss": "^4.6.0",
+    "swiper": "^9.3.2",
     "typescript": "5.0.3"
   }
 }
