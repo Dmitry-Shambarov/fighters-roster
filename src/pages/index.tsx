@@ -40,7 +40,7 @@ export default function Home(props: HomePropsType) {
 
   return (
     <>
-      <Slider/>
+      <Slider />
       <PostGrid>
         {posts.map((post) => (
           <Post
