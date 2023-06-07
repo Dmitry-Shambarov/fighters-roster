@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { fetchFighters } from './api/fetchFighters';
+import styles from '../styles/fighters.module.scss';
 
 interface Fighter {
   FighterId: number;
   FirstName: string;
   LastName: string;
-  Nickname: string;
-  WeightClass: string;
+  Weight: number;
 }
 
 const Fighters = () => {
@@ -17,11 +17,6 @@ const Fighters = () => {
       try {
         const fetchedFighters: Fighter[] = await fetchFighters();
         setFighters(fetchedFighters);
-
-        const weightClasses = fetchedFighters
-          .map((fighter) => fighter.WeightClass)
-          .filter((weightClass, index, array) => array.indexOf(weightClass) === index);
-        console.log('Weight Classes:', Array.from(weightClasses));
       } catch (error) {
         console.error('Error:', error);
       }
@@ -30,18 +25,90 @@ const Fighters = () => {
     getFighters();
   }, []);
 
+  const weightCategories = [
+    {
+      range: 'Heavyweight',
+      minWeight: 37,
+      maxWeight: 400,
+    },
+    {
+      range: 'Light heavyweight',
+      minWeight: 339,
+      maxWeight: 372,
+    },
+    {
+      range: 'Middleweight',
+      minWeight: 308,
+      maxWeight: 338,
+    },
+    {
+      range: 'Welterweight',
+      minWeight: 277,
+      maxWeight: 307,
+    },
+    {
+      range: 'Lightweight',
+      minWeight: 236,
+      maxWeight: 276,
+    },
+    {
+      range: 'Featherweight',
+      minWeight: 205,
+      maxWeight: 235,
+    },
+    {
+      range: 'Bantamweight',
+      minWeight: 174,
+      maxWeight: 204,
+    },
+    {
+      range: 'Flyweight',
+      minWeight: 0,
+      maxWeight: 173,
+    },
+  ];
+
+  const groupFightersByWeightClass = () => {
+    const result: Record<string, Fighter[]> = {};
+
+    weightCategories.forEach((category) => {
+      const { range, minWeight, maxWeight } = category;
+
+      result[range] = fighters
+        .filter((fighter) => fighter.Weight >= minWeight && fighter.Weight < maxWeight)
+        .slice(0, 15);
+    });
+    return result;
+  };
+
+  const groupedFighters = groupFightersByWeightClass();
+
   return (
-    <div>
-      {fighters.map((fighter) => (
-        <div key={fighter.FighterId}>
-          <h3>
-            {fighter.FirstName} {fighter.LastName}
-          </h3>
-          <h4>Nickname: {fighter.Nickname}</h4>
-          <p>Weight Class: {fighter.WeightClass}</p>
-        </div>
-      ))}
-    </div>
+    <table className={styles['fighters-table']}>
+      <thead>
+        <tr>
+          {weightCategories.map((category) => (
+            <th className={styles.th} key={category.range}>
+              {category.range}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          {weightCategories.map((category) => (
+            <td key={category.range} className={styles.td}>
+              {groupedFighters[category.range]?.map((fighter, index) => (
+                <div key={fighter.FighterId} className={styles.fighter}>
+                  <span>{index + 1}. </span>
+                  {fighter.FirstName} {fighter.LastName}
+                </div>
+              ))}
+            </td>
+          ))}
+        </tr>
+      </tbody>
+    </table>
   );
 };
 
