@@ -25,7 +25,7 @@ const Slider = () => {
     >
       {sliders.map((slide, index) => (
         <SwiperSlide key={index} className={s.swiperSlide}>
-          <img src={slide.src} alt={slide.alt} style={{ maxWidth: '1000px', height: '565px' }} />
+          <img className={s.image} src={slide.src} alt={slide.alt} />
         </SwiperSlide>
       ))}
     </Swiper>
