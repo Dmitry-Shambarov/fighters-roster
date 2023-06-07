@@ -6,6 +6,13 @@ import s from './Slider.module.scss';
 SwiperCore.use([Autoplay, Navigation]);
 
 const Slider = () => {
+  const sliders = [
+    { src: 'Image/champions.jpg', alt: 'champions' },
+    { src: 'Image/promo.jpg', alt: 'promo' },
+    { src: 'Image/nganu.jpg', alt: 'nganu' },
+    { src: 'Image/mcgregor.jpg', alt: 'mcgregor' },
+  ];
+
   return (
     <Swiper
       loop={true}
@@ -16,18 +23,11 @@ const Slider = () => {
       className={s.slider}
       navigation={true}
     >
-      <SwiperSlide className={s.swiperSlide}>
-        <img src="Image/champions.jpg" alt="Image 1" max-width="1000" height="565" />
-      </SwiperSlide>
-      <SwiperSlide className={s.swiperSlide}>
-        <img src="Image/promo.jpg" alt="Image 2" max-width="1000" height="565" />
-      </SwiperSlide>
-      <SwiperSlide className={s.swiperSlide}>
-        <img src="Image/nganu.jpg" alt="Image 3" max-width="1000" height="565" />
-      </SwiperSlide>
-      <SwiperSlide className={s.swiperSlide}>
-        <img src="Image/mcgregor.jpg" alt="Image 4" max-width="1000" height="565" />
-      </SwiperSlide>
+      {sliders.map((slide, index) => (
+        <SwiperSlide key={index} className={s.swiperSlide}>
+          <img src={slide.src} alt={slide.alt} style={{ maxWidth: '1000px', height: '565px' }} />
+        </SwiperSlide>
+      ))}
     </Swiper>
   );
 };

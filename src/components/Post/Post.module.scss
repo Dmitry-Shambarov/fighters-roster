@@ -10,15 +10,21 @@
   align-items: center;
   width: 100%;
   margin-bottom: 10px;
+  text-decoration: none;
 }
 
 .title {
   margin-bottom: 10px;
 }
 
+.link {
+  text-decoration: none;
+  color: black;
+}
+
 .image {
-  width: 400px;
-  height: 300px;
+  width: 80%;
+  height: 100%;
   margin-bottom: 10px;
 }
 
